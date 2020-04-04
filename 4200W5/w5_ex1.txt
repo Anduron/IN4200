@@ -1,0 +1,53 @@
+Bc = (data traffic)/Flops
+
+a)
+for (j=0; j<N; j++)
+  for (i=0; i<N; i++)
+    y[j] += A[j][i]*B[i];
+
+Flops: 2*N^2
+
+case 1:
+  small inner lattice:
+  words: N + 2*N^2
+  Bc = words/Flops < 1
+
+case 2:
+  large inner lattice:
+  words: 2N^2
+  Bc = words/Flops = 1
+
+b)
+double s = 0.;
+for (i=0; i<N; i++)
+  s += A[i]*A[i];
+
+Flops: 2 per iteration
+words: 1 per iteration
+Bc = words/flops = 1/2
+
+c)
+double s = 0.;
+for (i=0; i<N; i++)
+  s += A[i]*B[i];
+
+Flops: 2 per iteration
+words: 2 per iteration
+Bc = words/Flops = 1
+
+d)
+
+double s = 0.;
+for (i=0; i<N; i++)
+  s += A[i]*B[K[i]];
+
+
+Flops: 2 per iteration
+
+case 1 sequential access:
+words: 2.5 per iteration
+Bc = words/Flops = 1.25
+
+case 2 random access:
+words: 8 + 1 + 1/2 = 9.5
+Bc = 4.75

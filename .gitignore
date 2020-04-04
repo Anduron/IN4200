@@ -445,7 +445,6 @@ pip-selfcheck.json
 *.msg
 *.pages
 *.rtf
-*.txt
 *.wpd
 *.wps
 

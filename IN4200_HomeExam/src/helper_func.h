@@ -17,6 +17,14 @@ void print2dtab(char **A, int m, int n){
     }
 }
 
+void print_int_vector(int *A, int n){
+    printf("| ");
+    for (size_t i = 0; i < n; ++i) {
+      printf(" %d ", A[i]);
+    }
+    printf("|\n");
+}
+
 void free2dtable(char **A){
   free(A[0]);
   free(A);

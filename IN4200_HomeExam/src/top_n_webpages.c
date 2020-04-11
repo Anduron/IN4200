@@ -1,4 +1,3 @@
-//COMMENTS
 #include "top_n_webpages.h"
 
 void top_n_webpages(int num_webpages, int *num_involvements, int n){
@@ -81,6 +80,7 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
         }
       }
     }
+    free(temp_top_results);
   }
   #else
   {

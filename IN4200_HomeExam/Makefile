@@ -24,6 +24,13 @@ test.x : test.c $(DEP)
 testOMP.x : test.c $(DEP)
 	$(CC) $< -fopenmp -o $@ $(OBJ)
 
+benchmark.x : benchmark.c $(DEP)
+	$(CC) $< -o $@ $(OBJ)
+
+benchmarkOMP.x : benchmark.c $(DEP)
+	$(CC) $< -fopenmp -o $@ $(OBJ)
+
+
 clean :
 	rm -f *.o *.x
 

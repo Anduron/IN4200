@@ -50,10 +50,14 @@ int main(int argc, char *argv[]){
     printf("Tests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"count_mutual_links2.c") == 0){
-    test_count_mutual_links2();
+    total_tests = 2;
+    passed_tests = test_count_mutual_links2();
+    printf("Tests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"top_n_webpages.c") == 0){
-    test_top_n_webpages();
+    total_tests = 1;
+    passed_tests = test_top_n_webpages();
+    printf("Tests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"1") == 0){
     total_tests = 6;
@@ -180,7 +184,7 @@ int test_read_graph_from_file2(){
   1. If the number of nodes found by read_graph_from_file2.c is the same as expected
   2. If the number of links found by read_graph_from_file2.c is the same as expected
   3. If the vector containing the row pointer from read_graph_from_file2.c is as expected
-  3. If the vector containing the column indexes from read_graph_from_file2.c is as expected
+  4. If the vector containing the column indexes from read_graph_from_file2.c is as expected
   */
   int passed_tests = 0; //the value counting the number of passed tests!
   int N, N_links, *row_ptr, *col_idx;
@@ -366,9 +370,9 @@ int test_top_n_webpages(){
   int *top_results = (int *)calloc(n,sizeof(top_results));
 
   start = clock();
-  calc_top_n_webpages(N,num_involvements,top_results,n); //THIS FUNCTION IS SUPPOSED TO PRINT CANT MUTE :(
+  calc_top_n_webpages(N,num_involvements,top_results,n);
   start = clock() - start;
-  printf("\ntop_n_webpages took %fms to complete on test_graph.txt, without printing.\n", 1000*start/(double)CLOCKS_PER_SEC);
+  printf("\ncalc_top_n_webpages took %fms to complete on test_graph.txt, without printing.\n", 1000*start/(double)CLOCKS_PER_SEC);
 
   int counter = 0;
 
@@ -378,7 +382,7 @@ int test_top_n_webpages(){
       break;
     }
   }
-  
+
   if (counter == 0){
     printf("Test passed. Ranking vector is identical to the expected vector.\n");
     passed_tests += 1;
@@ -389,5 +393,6 @@ int test_top_n_webpages(){
 
   free2dtable(table2D);
   free(num_involvements);
+  free(top_results);
   return passed_tests;
 }

@@ -51,6 +51,7 @@ int main(){
 
   top_n_webpages(N, num_involvements, 10);
 
+  //free arrays from part 2
   free(row_ptr);
   free(col_idx);
   free(num_involvements);

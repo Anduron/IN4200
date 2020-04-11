@@ -36,13 +36,63 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
   memcpy(dummy_array, num_involvements, num_webpages*sizeof(num_involvements));
 
   int top_webpage = 0;
-  for (size_t i = 0; i < n; i++){
-    for (int j = 0; j < num_webpages; j++){
-      top_webpage = MAXIDX(top_webpage, j, dummy_array);
+
+  #if defined(_OPENMP)
+  {
+    int n_thread = omp_get_max_threads();
+    int *temp_top_results = malloc(n*n_thread*sizeof(*temp_top_results));
+
+    #pragma omp parallel
+    {
+      int thread_id = omp_get_thread_num();
+      int rest = num_webpages%n_thread;
+
+      for (int i = 0; i < n; i++){
+        //printf("%d", thread_id);
+        if(thread_id<n_thread){
+          for (int j = thread_id*num_webpages/n_thread; j < (thread_id+1)*num_webpages/n_thread; j++){
+            if (dummy_array[top_webpage]<=dummy_array[j]){
+              top_webpage = j;
+            }
+          }
+        }
+        else{
+          for (int j = thread_id*num_webpages/n_thread; j < num_webpages; j++){
+            if (dummy_array[top_webpage]<=dummy_array[j]){
+              top_webpage = j;
+            }
+          }
+        }
+        temp_top_results[n*thread_id+i] = top_webpage;
+        dummy_array[top_webpage] = -1;
+      }
+      #pragma omp barrier
+      #pragma omp master
+      {
+        memcpy(dummy_array, num_involvements, num_webpages*sizeof(num_involvements));
+        for (int i = 0; i < n; i++){
+          for (int j = 0; j < n*n_thread; j++){
+            if (dummy_array[top_webpage] <= dummy_array[temp_top_results[j]]){
+              top_webpage = temp_top_results[j];
+            }
+          }
+          top_results[i] = top_webpage;
+          dummy_array[top_webpage] = -1;
+        }
+      }
     }
-    top_results[i] = top_webpage;
-    dummy_array[top_webpage] = -1;
   }
+  #else
+  {
+    for (size_t i = 0; i < n; i++){
+      for (size_t j = 0; j < num_webpages; j++){
+        top_webpage = MAXIDX(top_webpage, j, dummy_array);
+      }
+      top_results[i] = top_webpage;
+      dummy_array[top_webpage] = -1;
+    }
+  }
+  #endif
 
   free(dummy_array);
 }
@@ -71,9 +121,9 @@ void original_top_n_webpages(int num_webpages, int *num_involvements, int n){
     for (int j = 0; j < num_webpages; j++){
       top_webpage = MAXIDX(top_webpage, j, dummy_array);
     }
-  printf("Ranking: %ld, Webpage number: %d, Number of involvements: %d\n", i+1, top_webpage+1, dummy_array[top_webpage]);
-  num_involvements[i] = dummy_array[top_webpage];
-  dummy_array[top_webpage] = -1;
+    printf("Ranking: %ld, Webpage number: %d, Number of involvements: %d\n", i+1, top_webpage+1, dummy_array[top_webpage]);
+    num_involvements[i] = dummy_array[top_webpage];
+    dummy_array[top_webpage] = -1;
   }
 
   free(dummy_array);

@@ -14,7 +14,7 @@
 int test_read_graph_from_file1();
 int test_read_graph_from_file2();
 int test_count_mutual_links1();
-//int test_count_mutual_links2();
+int test_count_mutual_links2();
 int test_top_n_webpages();
 //IMPLEMENT TIMING OF FUNCTIONS
 
@@ -50,32 +50,32 @@ int main(int argc, char *argv[]){
     printf("Tests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"count_mutual_links2.c") == 0){
-    //test_count_mutual_links2();
+    test_count_mutual_links2();
   }
   else if (strcmp(argv[1],"top_n_webpages.c") == 0){
-    //test_top_n_webpages();
+    test_top_n_webpages();
   }
   else if (strcmp(argv[1],"1") == 0){
-    total_tests = 5;
+    total_tests = 6;
     passed_tests += test_read_graph_from_file1();
     passed_tests += test_count_mutual_links1();
-    //test_top_n_webpages();
+    passed_tests += test_top_n_webpages();
     printf("\nTests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"2") == 0){
-    total_tests = 4;
+    total_tests = 7;
     passed_tests += test_read_graph_from_file2();
-    //test_count_mutual_links2();
-    //test_top_n_webpages();
+    passed_tests += test_count_mutual_links2();
+    passed_tests += test_top_n_webpages();
     printf("\nTests passed: %d/%d \n", passed_tests,total_tests);
   }
   else if (strcmp(argv[1],"all") == 0){
-    total_tests = 10
+    total_tests = 12
     ;
     passed_tests += test_read_graph_from_file1();
     passed_tests += test_count_mutual_links1();
     passed_tests += test_read_graph_from_file2();
-    //passed_tests += test_count_mutual_links2();
+    passed_tests += test_count_mutual_links2();
     passed_tests += test_top_n_webpages();
     printf("\nTests passed: %d/%d \n", passed_tests,total_tests);
   }
@@ -294,6 +294,58 @@ int test_count_mutual_links1(){
   return passed_tests;
 }
 
+int test_count_mutual_links2(){
+  /*
+  A function to test:
+  1. If the number of nodes found by read_graph_from_file2.c is the same as expected
+  2. If the number of links found by read_graph_from_file2.c is the same as expected
+  */
+  int passed_tests = 0;
+  int N, N_links, *row_ptr, *col_idx;
+  char **table2D;
+  int expected_num_involvements[8] = {2, 0, 4, 6, 5, 2, 4, 3};
+  int expected_total_mutual_links = 13;
+  clock_t start;
+
+  read_graph_from_file2("data/test_graph.txt", &N, &N_links,&row_ptr, &col_idx);
+
+  int *num_involvements = (int *)calloc(N,sizeof(num_involvements));
+
+  start = clock();
+  int total_mutual_links = count_mutual_links2 (N, N_links, row_ptr, col_idx, num_involvements);
+  start = clock() - start;
+  printf("\ncount_mutual_links2 took %fms to complete on test_graph.txt \n", 1000*start/(double)CLOCKS_PER_SEC);
+
+  int counter = 0;
+  for (int i = 0; i < N; i++){
+    if (expected_num_involvements[i] != num_involvements[i]){
+      counter = 1;
+      break;
+    }
+  }
+
+  if (expected_total_mutual_links == total_mutual_links){
+    printf("Test passed. Expected number of total mutual links: %d, Found: %d.\n", expected_total_mutual_links, total_mutual_links);
+    passed_tests += 1;
+  }
+  else{
+    printf("Test failed. Did not find the expected number of total mutual links.\nExpected: %d, Found: %d\n", expected_total_mutual_links, total_mutual_links);
+  }
+  if (counter == 0){
+    printf("Test passed. Number of involvements vector is identical to the expected vector.\n");
+    passed_tests += 1;
+  }
+  else{
+    printf("Test failed. Number of involvements vector is NOT identical to the expected vector.\n");
+  }
+
+  free(row_ptr);
+  free(col_idx);
+  free(num_involvements);
+  return passed_tests;
+}
+
+
 int test_top_n_webpages(){
   /*
   A function to test:
@@ -326,7 +378,7 @@ int test_top_n_webpages(){
       break;
     }
   }
-
+  
   if (counter == 0){
     printf("Test passed. Ranking vector is identical to the expected vector.\n");
     passed_tests += 1;

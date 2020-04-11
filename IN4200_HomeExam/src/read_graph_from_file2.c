@@ -16,10 +16,10 @@ void read_graph_from_file2 (char *filename, int *N, int *N_links, int **row_ptr,
   fscanf(infile, "%*s %*s %d %*s %d \n", &*N, &*N_links);
   fscanf(infile, "%*[^\n]\n"); //SKIP: line 4
 
-  *col_idx = (int *)calloc((*N_links),sizeof(int));
-  *row_ptr = (int *)calloc((*N+1),sizeof(int));
-  int *ToNodeId = (int *)calloc((*N_links),sizeof(int));
-  int *FromNodeId = (int *)calloc((*N_links),sizeof(int));
+  *col_idx = (int *)calloc((*N_links),sizeof(col_idx));
+  *row_ptr = (int *)calloc((*N+1),sizeof(row_ptr));
+  int *ToNodeId = (int *)calloc((*N_links),sizeof(ToNodeId));
+  int *FromNodeId = (int *)calloc((*N_links),sizeof(FromNodeId));
 
   for(size_t k = 0; k < *N_links; k++){
     fscanf(infile, "%d %d", &j, &i);

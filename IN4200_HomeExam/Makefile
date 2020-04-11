@@ -15,8 +15,14 @@ OBJ = $(wildcard src/*.c)
 main.x : main.c $(DEP)
 	$(CC) $< -o $@ $(OBJ)
 
+mainOMP.x : main.c $(DEP)
+	$(CC) $< -fopenmp -o $@ $(OBJ)
+
 test.x : test.c $(DEP)
 	$(CC) $< -o $@ $(OBJ)
+
+testOMP.x : test.c $(DEP)
+	$(CC) $< -fopenmp -o $@ $(OBJ)
 
 clean :
 	rm -f *.o *.x

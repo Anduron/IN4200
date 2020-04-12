@@ -1,4 +1,4 @@
-#IN4200: Home Exam 1, Spring 2020
+# IN4200: Home Exam 1, Spring 2020
 
 **Counting Mutual Web Linkage Occurences**
 
@@ -9,7 +9,7 @@ This project was embarked on in collaboration with candidate 15244.
 Our individual programs may therefore bear a strong resemblance in
 both presentation and content.
 
-###Contents
+### Contents
 - Data
 
   - test_graph.txt
@@ -91,7 +91,7 @@ both presentation and content.
     - file for running tests on the functions found in src folder to insure the correctness of the functions implemented during this exam.
 
 
-##Usage
+## Usage
 
 - [benchmark.c]
   - when in IN4200_HE1_15224 type into terminal: "make benchmark.x" "./benchmark.x filename graph_file N_bench" or "make benchmarkOMP.x" "./benchmarkOMP filename graph_file N_bench" to run parallel code, where filename is the name of the function you want to benchmark e.g. "count_mutual_links1.c", graph_file is the filename of the web graph on which you want to benchmark, and N_bench is the number of repetitions run during benchmarking

@@ -47,17 +47,19 @@ def run_benchmark(filename, graph_files, N_bench, max_num_threads, fsave):
     return 0
 
 def main():
+    n1 = 1000
+    n2 = 500 # WARNING: this might take a long time
     graph_files_rg1 = ["data/test_graph.txt", "data/test_graph100.txt"]
     graph_files_cm1 = ["data/test_graph.txt", "data/test_graph100.txt"]
     graph_files_rg2 = ["data/test_graph.txt", "data/test_graph100.txt", "data/web-NotreDame.txt"]
     graph_files_cm2 = ["data/test_graph.txt", "data/test_graph100.txt", "data/web-NotreDame.txt"]
     graph_files_tnw = ["data/test_graph.txt", "data/test_graph100.txt", "data/web-NotreDame.txt"]
 
-    run_benchmark("read_graph_from_file1.c", graph_files_rg1, 1000, 8, "read1_test.png")
-    run_benchmark("count_mutual_links1.c", graph_files_cm1, 1000, 8, "count1_test.png")
-    run_benchmark("read_graph_from_file2.c", graph_files_rg2, 500, 8, "read2_test.png")
-    run_benchmark("count_mutual_links2.c", graph_files_cm2, 500, 8, "count2_test.png")
-    run_benchmark("top_n_webpages.c", graph_files_tnw, 500, 8, "top_n_test.png")
+    run_benchmark("read_graph_from_file1.c", graph_files_rg1, n1, 8, "read1_test.png")
+    run_benchmark("count_mutual_links1.c", graph_files_cm1, n1, 8, "count1_test.png")
+    run_benchmark("read_graph_from_file2.c", graph_files_rg2, n2, 8, "read2_test.png")
+    run_benchmark("count_mutual_links2.c", graph_files_cm2, n2, 8, "count2_test.png")
+    run_benchmark("top_n_webpages.c", graph_files_tnw, n2, 8, "top_n_test.png")
     return 0
 
 if __name__ == '__main__':

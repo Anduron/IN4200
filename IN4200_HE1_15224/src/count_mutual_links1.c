@@ -3,24 +3,20 @@
 int count_mutual_links1 (int N, char **table2D, int *num_involvements){
 
   int tot_mutual_links = 0;
-
-  int *links_from = (int *)calloc(N,sizeof(*links_from));
   int links_to;
 
   #if defined(_OPENMP)
   {
-    #pragma omp parallel for reduction(+: tot_mutual_links, links_from[:N], num_involvements[:N]) private(links_to)
+    //one of the two lines below should compile and run on an ifi machine
+    #pragma omp parallel for private(links_to) reduction(+: tot_mutual_links, num_involvements[:N])
+    //#pragma omp parallel for private(links_to) reduction(+: tot_mutual_links)
     for(size_t i = 0; i < N; i++){
-      memset(links_from, 0, N*sizeof(*links_from));
       links_to = 0;
       for(size_t j = 0; j < N; j++){
-        if (table2D[i][j]){ //if its 0 its False
-          links_to++;
-          links_from[j] = 1;
-        }
+          links_to += table2D[i][j];
       }
       for(size_t k = 0; k < N; k++){
-        if(links_from[k]){
+        if(table2D[i][k]){
           num_involvements[k] += links_to - 1;
         }
       }
@@ -30,16 +26,12 @@ int count_mutual_links1 (int N, char **table2D, int *num_involvements){
   #else
   {
     for(size_t i = 0; i < N; i++){
-      memset(links_from, 0, N*sizeof(*links_from));
       links_to = 0;
       for(size_t j = 0; j < N; j++){
-        if (table2D[i][j]){ //if its 0 its False
-          links_to++;
-          links_from[j] = 1;
-        }
+          links_to += table2D[i][j];
       }
       for(size_t k = 0; k < N; k++){
-        if(links_from[k]){
+        if(table2D[i][k]){
           num_involvements[k] += links_to - 1;
         }
       }
@@ -48,7 +40,5 @@ int count_mutual_links1 (int N, char **table2D, int *num_involvements){
   }
   #endif
 
-
-  free(links_from);
   return tot_mutual_links;
 }

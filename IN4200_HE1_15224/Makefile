@@ -1,6 +1,6 @@
 CC := gcc
 
-CFLAGS = -Wall -std=c11
+CFLAGS = -std=c99
 
 PROFILE := -pg
 
@@ -13,22 +13,22 @@ OBJ = $(wildcard src/*.c)
 .PHONY : all clean
 
 main.x : main.c $(DEP)
-	$(CC) $< -o $@ $(OBJ)
+	$(CC) $< -o $@ $(OBJ) $(CFLAGS)
 
 mainOMP.x : main.c $(DEP)
-	$(CC) $< -fopenmp -o $@ $(OBJ)
+	$(CC) $< -fopenmp -o $@ $(OBJ) $(CFLAGS)
 
 test.x : test.c $(DEP)
-	$(CC) $< -o $@ $(OBJ)
+	$(CC) $< -o $@ $(OBJ) $(CFLAGS)
 
 testOMP.x : test.c $(DEP)
-	$(CC) $< -fopenmp -o $@ $(OBJ)
+	$(CC) $< -fopenmp -o $@ $(OBJ) $(CFLAGS)
 
 benchmark.x : benchmark.c $(DEP)
-	$(CC) $< -o $@ $(OBJ)
+	$(CC) $< -o $@ $(OBJ) $(CFLAGS)
 
 benchmarkOMP.x : benchmark.c $(DEP)
-	$(CC) $< -fopenmp -o $@ $(OBJ)
+	$(CC) $< -fopenmp -o $@ $(OBJ) $(CFLAGS)
 
 
 clean :

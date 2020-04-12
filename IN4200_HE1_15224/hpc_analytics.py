@@ -57,7 +57,7 @@ def main():
 
     run_benchmark("read_graph_from_file1.c", graph_files_rg1, n1, 8, "read1_test.png")
     run_benchmark("count_mutual_links1.c", graph_files_cm1, n1, 8, "count1_test.png")
-    run_benchmark("read_graph_from_file2.c", graph_files_rg2, n2, 8, "read2_test.png")
+    run_benchmark("read_graph_from_file2.c", graph_files_rg2, n2-300, 8, "read2_test.png")
     run_benchmark("count_mutual_links2.c", graph_files_cm2, n2, 8, "count2_test.png")
     run_benchmark("top_n_webpages.c", graph_files_tnw, n2, 8, "top_n_test.png")
     return 0

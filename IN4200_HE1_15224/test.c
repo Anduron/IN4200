@@ -20,6 +20,10 @@ int test_top_n_webpages();
 
 int main(int argc, char *argv[]){
   /*
+  ARGS:
+  1. name of this compiled file: run with "./test.x" or "./testOMP.x"
+  2. name of file with the function you want to test i.e. "count_mutual_links2.c"
+
   A verbose testfunction, that takes a valid "filename", "1", "2" or "all" as input.
   Can also take an invalid "filename" but will then return a list of valid inputs.
   Runs tests and tallies the total ammount of passed tests as output.

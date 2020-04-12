@@ -20,6 +20,11 @@ void benchmark_top_n_webpages(char *graph_file, int N_bench);
 
 int main(int argc, char *argv[]){
   /*
+  ARGS:
+  1. name of this compiled file: run with "./benchmark.x"
+  2. name of file with the function you want to benchmark e.g. "count_mutual_links2.c"
+  3. name of graph file you want to benchmark on e.g. "web-NotreDame.txt"
+  4. Numer of repetitions when running the function to benchmark
   A benchmark function, that takes a valid "filename", "1", "2" or "all" as input.
   Can also take an invalid "filename" but will then return a list of valid inputs.
   Runs benchmarks that print timings of each function.

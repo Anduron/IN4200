@@ -12,6 +12,9 @@
 #include "src/top_n_webpages.h"
 
 int main(){
+  /*
+  A main to call the different function and print some of the results.
+  */
   int N, *num_involvements, total_mutual_links;
   char **table2D;
 

@@ -58,19 +58,17 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
     #pragma omp parallel
     {
       int thread_id = omp_get_thread_num();
-      int rest = num_webpages%n_thread;
-
       for (int i = 0; i < n; i++){
-        if(thread_id<n_thread){
+        if(thread_id<n_thread-1){
           for (int j = thread_id*num_webpages/n_thread; j < (thread_id+1)*num_webpages/n_thread; j++){ //allocates a part of list to each thread
-            if (dummy_array[top_webpage]<=dummy_array[j]){  //Finds maximum value of copy
+            if (dummy_array[top_webpage]<dummy_array[j]){  //Finds maximum value of copy
               top_webpage = j;                              //sets top_webpage as index of maximum value
             }
           }
         }
         else{
           for (int j = thread_id*num_webpages/n_thread; j < num_webpages; j++){ //same as above for remaining part of list
-            if (dummy_array[top_webpage]<=dummy_array[j]){
+            if (dummy_array[top_webpage]<dummy_array[j]){
               top_webpage = j;
             }
           }
@@ -84,7 +82,7 @@ void calc_top_n_webpages(int num_webpages, int *num_involvements, int *top_resul
         memcpy(dummy_array, num_involvements, num_webpages*sizeof(num_involvements)); //remake copy
         for (int i = 0; i < n; i++){  //iterates n times over nxn_thread long array of indices
           for (int j = 0; j < n*n_thread; j++){
-            if (dummy_array[top_webpage] <= dummy_array[temp_top_results[j]]){ //finds which of the nxnthread indices contains max value
+            if (dummy_array[top_webpage] < dummy_array[temp_top_results[j]]){ //finds which of the nxnthread indices contains max value
               top_webpage = temp_top_results[j];  //top webage is set
             }
           }

@@ -34,7 +34,6 @@ int main(){
   printf("\nTotal number of mutual links: %d\n",total_mutual_links);
 
   top_n_webpages(N, num_involvements, 10);
-
   //free all relevant arrays from testing part 1
   free2dtable(table2D);
   free(num_involvements);
@@ -52,6 +51,9 @@ int main(){
   total_mutual_links = count_mutual_links2(N, N_links, row_ptr, col_idx, num_involvements);
   printf("\nTotal number of mutual links: %d\n",total_mutual_links);
 
+  int *top_results = (int *)malloc(10*sizeof(top_results)); //allocates an n long array to store the top n elements
+  int counter = 0;
+  
   top_n_webpages(N, num_involvements, 10);
 
   //free arrays from part 2

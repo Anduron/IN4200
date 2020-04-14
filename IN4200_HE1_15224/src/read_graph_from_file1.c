@@ -38,7 +38,9 @@ void read_graph_from_file1 (char *filename, int *N, char ***table2D){
 
   for(size_t k = 0; k < nedges; k++){
     fscanf(infile, "%d %d", &j, &i);  //finding the indices of the outbound and inbound links
-    (*table2D)[i][j] = 1;             //these indices insure a transposed version of the table
+    if(i != j){
+      (*table2D)[i][j] = 1;             //these indices insure a transposed version of the table
+    }
   }                                   //these indices are assinged the value 1 in the table
 
   fclose(infile);

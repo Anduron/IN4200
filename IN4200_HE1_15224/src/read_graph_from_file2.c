@@ -43,25 +43,29 @@ void read_graph_from_file2 (char *filename, int *N, int *N_links, int **row_ptr,
   fscanf(infile, "%*s %*s %d %*s %d \n", &*N, &*N_links); //getting the values of N and N_links
   fscanf(infile, "%*[^\n]\n"); //SKIP: line 4
 
-  *col_idx = (int *)calloc((*N_links),sizeof(col_idx));           //allocate col_idx
   *row_ptr = (int *)calloc((*N+1),sizeof(row_ptr));               //allocate row_ptr
   int *ToNodeId = (int *)calloc((*N_links),sizeof(ToNodeId));     //allocate column of ToNodeId
   int *FromNodeId = (int *)calloc((*N_links),sizeof(FromNodeId)); //allocate column of FromNodeId
 
+  int N_links_n = 0;
   for(size_t k = 0; k < *N_links; k++){
     fscanf(infile, "%d %d", &j, &i);  //getting the indices i and j from column is filename
-    (*row_ptr)[i+1]++;                //adding up "spaces" between rows (counting number of same indices)
-    ToNodeId[k] = i;                  //storing the values in the second column in filename
-    FromNodeId[k] = j;                //storing the values in the first column in filename
+    if (i!=j && (i < (*N)) && (j < (*N))){
+      (*row_ptr)[i+1]++;                //adding up "spaces" between rows (counting number of same indices)
+      ToNodeId[N_links_n] = i;                  //storing the values in the second column in filename
+      FromNodeId[N_links_n] = j;                //storing the values in the first column in filename
+      N_links_n ++;
+    }
   }
 
-  for (int i = 1; i < (*N)+1; i++){
+  for (int i = 2; i < (*N)+1; i++){
     (*row_ptr)[i] += (*row_ptr)[i-1]; //cumulative summation of number of links per row
   }                                   //this will give us integer values from 0 to N_links
                                       //(indices at which new rows start in col_idx)
 
+  *col_idx = (int *)calloc((N_links_n),sizeof(col_idx));           //allocate col_idx
   int *counter = calloc((*N), sizeof(*counter)); //1. this counter is there to make sure no vals in col_idx are overwritten
-  for(size_t i = 0; i < *N_links; i++){          //2. + good ordering of vals in col_idx
+  for(size_t i = 0; i < N_links_n; i++){          //2. + good ordering of vals in col_idx
     (*col_idx)[(*row_ptr)[ToNodeId[i]] + counter[ToNodeId[i]]] = FromNodeId[i]; //3. all vals are found in FromNodeId
     counter[ToNodeId[i]]++;                      //4. Indices are found in ToNodeId, counter offset idices ref(1)
   }

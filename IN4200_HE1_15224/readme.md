@@ -70,7 +70,7 @@ both presentation and content.
     - the header file for [read_graph_from_file2.c]
 
   - [top_n_webpages.c]
-    - file containing a function for finding the top n webpages based on number of involvements found by either [count_mutual_links1.c] or [count_mutual_links2.c]
+    - file containing different functions for finding the top n webpages based on number of involvements found by either [count_mutual_links1.c] or [count_mutual_links2.c]
 
   - [top_n_webpages.h]
     - the header file for [top_n_webpages.c]
@@ -95,6 +95,12 @@ both presentation and content.
 
 - [benchmark.c]
   - when in IN4200_HE1_15224 type into terminal: "make benchmark.x" "./benchmark.x filename graph_file N_bench" or "make benchmarkOMP.x" "./benchmarkOMP filename graph_file N_bench" to run parallel code, where filename is the name of the function you want to benchmark e.g. "count_mutual_links1.c", graph_file is the filename of the web graph on which you want to benchmark, and N_bench is the number of repetitions run during benchmarking
+
+- [src/count_mutual_links1.c]
+  - the pragmas in this function may not run properly at UiO servers. I have added pragmas that can run at UiO in the comments above the current pragmas.
+
+- [src/count_mutual_links2.c]
+  - the pragmas in this function may not run properly at UiO servers. I have added pragmas that can run at UiO in the comments above the current pragmas.
 
 
 - [hpc_analytics.py]

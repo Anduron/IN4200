@@ -64,6 +64,21 @@ int **read2D_array(char *filename, int ***A, int *m, int *n){
   fscanf(infile, "%*s %d %*s %d \n", &*m, &*n); //getting the values of m and n
 
   zeroes2D_array(A,*m,*n);
+  print2int_array(*A,*m,*n);
+  printf("here\n");
+
+  for (size_t i = 0; i < *m; i++) {
+    for (size_t j = 0; j < *n; j++) {
+      int c = 0;
+      printf("i=%ld, j=%ld\n",i,j);
+      fscanf(infile, "%d", &c);
+      printf("c=%d\n",c);
+      *A[i][j] = c;
+      printf("A=%d\n",*A[i][j]);
+    }
+    printf("here \n");
+    fscanf(infile, "%*[^\n]\n"); //done with: line i
+  }
 
   fclose(infile);
 }

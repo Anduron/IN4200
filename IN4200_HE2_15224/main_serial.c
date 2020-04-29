@@ -9,18 +9,19 @@
 int main(){
   int m, n, max_rng;
   int **v;
-  m = 4;
-  n = 5;
-  max_rng = 5;
   int total_friends_of_ten = 0;
 
-  zeroes2D_array(&v,m,n); //allocates a 2D int array of zeroes
-
-  for (size_t i = 0; i < m; i++) {
-    for (size_t j = 0; j < n; j++) {
-      v[i][j] = (rand()%max_rng)+1; //No elements = 0
-    }
-  }
+  //m = 6;
+  //n = 9;
+  //max_rng = 7;
+  //zeroes2D_array(&v,m,n); //allocates a 2D int array of zeroes
+  //
+  //for (size_t i = 0; i < m; i++) {
+  //  for (size_t j = 0; j < n; j++) {
+  //    v[i][j] = (rand()%max_rng)+1; //No elements = 0
+  //  }
+  //}
+  read2D_array("data/test_matrix.txt",&v,&m,&n);
 
   print2int_array(v,m,n);
 

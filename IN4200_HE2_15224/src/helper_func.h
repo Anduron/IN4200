@@ -12,46 +12,44 @@ void print2int_array(int **A, int m, int n){
     2. int m the height of A.
     3. int n the lenght of A.
     */
-    for (size_t i = 0; i < m; ++i) {
+    for (size_t i = 0; i < m; i++) {
         printf("| ");
-        for (size_t j = 0; j < n; ++j) {
+        for (size_t j = 0; j < n; j++) {
             printf("%d ", A[i][j]);
         }
         printf("|\n");
     }
 }
 
-int **empty2D_array(int ***A, int m, int n){
+void empty2D_array(int ***A, int m, int n){
     /*
     1. int **A the int double pointer that you want to print. A is an mxn 2D array.
     2. int m the height of A.
     3. int n the lenght of A.
     */
-    *A = (int **)malloc(m*sizeof(int*));      //allocating table2D
-    *A[0] = (int *)malloc(m*n*sizeof(int));     //allocating table2D
+    *A = (int **)malloc(m*sizeof(int*));      //allocating 2D array
+    *A[0] = (int *)malloc(m*n*sizeof(int));     //allocating 2D array
 
     for(size_t i = 0; i < m; i++){
-      (*A)[i] = &((*A)[0][n*i]);       //allocating table2D
+      (*A)[i] = &((*A)[0][n*i]);       //allocating 2D array
     }
-    return *A;
 }
 
-int **zeroes2D_array(int ***A, int m, int n){
+void zeroes2D_array(int ***A, int m, int n){
     /*
     1. int **A the int double pointer that you want to print. A is an mxn 2D array.
     2. int m the height of A.
     3. int n the lenght of A.
     */
-    *A = (int **)calloc(m,sizeof(int*));      //allocating table2D
-    *A[0] = (int *)calloc(m*n,sizeof(int));     //allocating table2D
+    *A = (int **)calloc(m,sizeof(int*));      //allocating 2D array
+    *A[0] = (int *)calloc(m*n,sizeof(int));     //allocating 2D array
 
     for(size_t i = 0; i < m; i++){
-      (*A)[i] = &((*A)[0][n*i]);       //allocating table2D
+      (*A)[i] = &((*A)[0][n*i]);       //allocating 2D array
     }
-    return *A;
 }
 
-int **read2D_array(char *filename, int ***A, int *m, int *n){
+void test2D_array(char *filename, int ***A, int *m, int *n, int *test_num){
   FILE *infile = fopen(filename, "r");
 
   if (infile == NULL) {
@@ -62,21 +60,19 @@ int **read2D_array(char *filename, int ***A, int *m, int *n){
   fscanf(infile, "%*[^\n]\n"); //SKIP: line 1
   fscanf(infile, "%*[^\n]\n"); //SKIP: line 2
   fscanf(infile, "%*s %d %*s %d \n", &*m, &*n); //getting the values of m and n
+  fscanf(infile, "%*s %*s %d \n", &*test_num); //getting the number of friends of three
+
+  *m = (int)*m;
+  *n = (int)*n;
 
   zeroes2D_array(A,*m,*n);
-  print2int_array(*A,*m,*n);
-  printf("here\n");
 
-  for (size_t i = 0; i < *m; i++) {
-    for (size_t j = 0; j < *n; j++) {
+  for (size_t i = 0; i < (*m); i++) {
+    for (size_t j = 0; j < (*n); j++) {
       int c = 0;
-      printf("i=%ld, j=%ld\n",i,j);
       fscanf(infile, "%d", &c);
-      printf("c=%d\n",c);
-      *A[i][j] = c;
-      printf("A=%d\n",*A[i][j]);
+      (*A)[i][j] = c;
     }
-    printf("here \n");
     fscanf(infile, "%*[^\n]\n"); //done with: line i
   }
 
@@ -90,7 +86,7 @@ void print_int_vector(int *A, int n){
     2. int n the lenght of A.
     */
     printf("| ");
-    for (size_t i = 0; i < n; ++i) {
+    for (size_t i = 0; i < n; i++) {
       printf(" %d ", A[i]);
     }
     printf("|\n");

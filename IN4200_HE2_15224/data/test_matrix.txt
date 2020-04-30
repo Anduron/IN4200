@@ -1,6 +1,7 @@
 Test Matrix:
-With number of triple friends of ten = 7
+Small Example
 M= 4 N= 5
+friends_of_ten = 7
 1 5 6 3 1
 2 4 4 1 7
 7 2 3 1 2

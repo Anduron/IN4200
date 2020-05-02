@@ -10,8 +10,8 @@ int count_friends_of_ten (int M, int N, int **v){
         boolean = (v[i][j] + v[i+1][j+1] + v[i+2][j+2]) == 10;
         mutual_friends_of_ten += boolean;
       }
-      if (i >= 2 && j >= 2){
-        boolean = (v[i][j] + v[i-1][j-1] + v[i-2][j-2]) == 10;
+      if (i < M-2 && j >= 2){
+        boolean = (v[i][j] + v[i+1][j-1] + v[i+2][j-2]) == 10;
         mutual_friends_of_ten += boolean;
       }
       if (i < M-2){

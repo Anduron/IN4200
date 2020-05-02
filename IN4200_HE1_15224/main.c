@@ -53,12 +53,13 @@ int main(){
 
   int *top_results = (int *)malloc(10*sizeof(top_results)); //allocates an n long array to store the top n elements
   int counter = 0;
-  
+
   top_n_webpages(N, num_involvements, 10);
 
   //free arrays from part 2
   free(row_ptr);
   free(col_idx);
   free(num_involvements);
+  free(top_results);
   return 0;
 }

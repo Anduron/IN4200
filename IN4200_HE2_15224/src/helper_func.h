@@ -51,16 +51,17 @@ void zeroes2D_array(int ***A, int m, int n){
 
 void test2D_array(char *filename, int ***A, int *m, int *n, int *test_num){
   FILE *infile = fopen(filename, "r");
+  int dummy; //to avoid warnings from fscanf
 
   if (infile == NULL) {
     printf("ERROR: Failure to open file %s\n", filename); //test to see if filename exists
     exit(0);
   }
 
-  fscanf(infile, "%*[^\n]\n"); //SKIP: line 1
-  fscanf(infile, "%*[^\n]\n"); //SKIP: line 2
-  fscanf(infile, "%*s %d %*s %d \n", &*m, &*n); //getting the values of m and n
-  fscanf(infile, "%*s %*s %d \n", &*test_num); //getting the number of friends of three
+  dummy = fscanf(infile, "%*[^\n]\n"); //SKIP: line 1
+  dummy = fscanf(infile, "%*[^\n]\n"); //SKIP: line 2
+  dummy = fscanf(infile, "%*s %d %*s %d \n", &*m, &*n); //getting the values of m and n
+  dummy = fscanf(infile, "%*s %*s %d \n", &*test_num); //getting the number of friends of three
 
   *m = (int)*m;
   *n = (int)*n;
@@ -70,10 +71,10 @@ void test2D_array(char *filename, int ***A, int *m, int *n, int *test_num){
   for (size_t i = 0; i < (*m); i++) {
     for (size_t j = 0; j < (*n); j++) {
       int c = 0;
-      fscanf(infile, "%d", &c);
+      dummy = fscanf(infile, "%d", &c);
       (*A)[i][j] = c;
     }
-    fscanf(infile, "%*[^\n]\n"); //done with: line i
+    dummy = fscanf(infile, "%*[^\n]\n"); //done with: line i
   }
 
   fclose(infile);

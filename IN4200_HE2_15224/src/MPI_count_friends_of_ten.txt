@@ -1,6 +1,0 @@
-#include "MPI_count_friends_of_ten.h"
-
-int MPI_count_friends_of_ten (int M, int N, int **v){
-
-  return 0
-}

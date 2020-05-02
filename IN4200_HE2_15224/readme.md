@@ -1,4 +1,4 @@
-# IN4200: Home Exam 1, Spring 2020
+# IN4200: Home Exam 2, Spring 2020
 
 **Counting Mutual Web Linkage Occurences**
 
@@ -15,17 +15,35 @@ both presentation and content.
   - test_matrix.txt
     - A small test matrix with a predictable result
 
+- results
 
 - src
 
   - [count_friends_of_ten.c]
     - file containing a function for finding
 
+  - [count_friends_of_ten.h]
+    - header for
+
+
+  - [mpi_count_friends_of_ten.c]
+    - file containing a function for finding
+
+  - [mpi_count_friends_of_ten.h]
+    - header for
+
+  - [helper_func.h]
+    - A header file containing functions used
+
+
 
 - Files in main folder
 
-  - [main.c]
-    - file for running and printing the main results of the functions found in src folder that was created during this exam
+  - [main_serial.c]
+    - file for running and printing the main results of the serial functions found in src folder that was created during this exam
+
+  - [mpi_main.c]
+    - file for running and printing the main results of the parallel MPI functions found in src folder that was created during this exam
 
 
 ## Usage
@@ -35,3 +53,9 @@ both presentation and content.
 
 - [mpi_main.c]
   - when in IN4200_HE2_15224 type into terminal: "make mpi_main.x" "./mpi_main.x" to run parallel code
+
+- [benchmark.c]
+  - not implemented
+
+- [hpc_analytics.py]
+  - not implemented

@@ -52,7 +52,9 @@ both presentation and content.
 ## Usage
 
 - [main_serial.c]
-  - when in IN4200_HE2_15224 type into terminal: "make main_serial.x" "./main_serial.x m n <test?>" to run serial code, where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted)
+  - when in IN4200_HE2_15224 type into terminal: "make main_serial.x" to compile, "./main_serial.x m n <test?>" to run serial code, where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted)
 
 - [mpi_main.c]
-  - when in IN4200_HE2_15224 type into terminal: "make mpi_main.x" "mpirun -np <numprocs> ./mpi_main.x m n <test?>" to run parallel code where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted). Here <test?> means that you will not create a random matrix, and m and n can be completely random. <numprocs> is the number of processes to use (e.g. 1, 4 or 8).
+  - when in IN4200_HE2_15224 type into terminal: "make mpi_main.x" to compile, "mpirun -np <numprocs> ./mpi_main.x m n <test?>" to run parallel code where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted). Here <test?> means that you will not create a random matrix, and m and n can be completely random. <numprocs> is the number of processes to use (e.g. 1, 4 or 8).
+  On ifi computer run with (compilation should still be same):
+  "/usr/lib64/openmpi/bin/mpirun -np <numprocs> ./mpi_main.x m n <test?>"

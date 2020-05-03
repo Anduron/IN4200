@@ -1,5 +1,5 @@
 Test Matrix:
-Small Example
+Small Example: Numbers from 1 to 7
 M= 4 N= 5
 friends_of_ten = 7
 1 5 6 3 1

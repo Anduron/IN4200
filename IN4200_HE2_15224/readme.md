@@ -15,25 +15,28 @@ both presentation and content.
   - test_matrix.txt
     - A small test matrix with a predictable result
 
-- results
+  - test_matrix_11x7.txt
+    - A small 11x7 test matrix with a predictable result
+
+
 
 - src
 
   - [count_friends_of_ten.c]
-    - file containing a function for finding
+    - file containing a function for finding the number of triple friends of ten (three in a row adding up to ten) in a matrix
 
   - [count_friends_of_ten.h]
-    - header for
+    - header for count_friends_of_ten.c
 
 
   - [mpi_count_friends_of_ten.c]
-    - file containing a function for finding
+    - file containing a function for finding the number of triple friends of ten in a matrix using a parallel algorithm where a MASTER splits up work between each WORKER.
 
   - [mpi_count_friends_of_ten.h]
-    - header for
+    - header for mpi_count_friends_of_ten.c
 
   - [helper_func.h]
-    - A header file containing functions used
+    - A header file containing functions used to read, print, and allocate matrices in main_serial.c or mpi_main.c
 
 
 
@@ -49,13 +52,7 @@ both presentation and content.
 ## Usage
 
 - [main_serial.c]
-  - when in IN4200_HE2_15224 type into terminal: "make main_serial.x" "./main_serial.x" to run serial code
+  - when in IN4200_HE2_15224 type into terminal: "make main_serial.x" "./main_serial.x m n <test?>" to run serial code, where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted)
 
 - [mpi_main.c]
-  - when in IN4200_HE2_15224 type into terminal: "make mpi_main.x" "./mpi_main.x" to run parallel code
-
-- [benchmark.c]
-  - not implemented
-
-- [hpc_analytics.py]
-  - not implemented
+  - when in IN4200_HE2_15224 type into terminal: "make mpi_main.x" "mpirun -np <numprocs> ./mpi_main.x m n <test?>" to run parallel code where m is the height of the matrix (num rows) and n is the width of the matrix (num columns) and <test?> is whether or not you want to use a test matrix (m and n is mandatory however test is not and can be omitted). Here <test?> means that you will not create a random matrix, and m and n can be completely random. <numprocs> is the number of processes to use (e.g. 1, 4 or 8).

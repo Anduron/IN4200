@@ -5,17 +5,19 @@
 #include <time.h>
 #include <mpi.h>
 #include "src/helper_func.h"
-#include "src/count_friends_of_ten.h" //to check that they get same results
 #include "src/mpi_count_friends_of_ten.h"
 
 int main(int argc, char **argv){
+  /*
+  A main to call the different function and print some of the results for the parallel algo.
+  */
   int m = 0, n = 0, rank, size, test_num, max_rng;
   int **v = NULL;
   int friends = 0, total_friends_of_ten = 0;
   char *test_check;
 
-  MPI_Init (&argc, &argv);
-  MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+  MPI_Init(&argc, &argv);
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
   if (rank == 0){
 
@@ -34,20 +36,24 @@ int main(int argc, char **argv){
     }
     else{
       printf("Testing a case of a known matrix\n");
-      test2D_array("data/test_matrix.txt",&v,&m,&n,&test_num);
+      test2D_array("data/test_matrix_11x7.txt",&v,&m,&n,&test_num);
     }
   }
 
   friends = MPI_count_friends_of_ten(m,n,v);
-  printf("MPI rank <%d>: Total number of triple friends=%d\n",rank,friends);
 
-  MPI_Reduce(&friends,&total_friends_of_ten,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD);
+  MPI_Reduce(&friends,&total_friends_of_ten,1,MPI_INT,MPI_SUM,0,MPI_COMM_WORLD); //Sums num friends from each WORKER
 
+  if (rank > 0){
+    printf("MPI rank <%d>: WORKER FOUND Number of triple friends=%d\n",rank,friends);
+  }
+
+  MPI_Barrier(MPI_COMM_WORLD); //Attempt to get pretty print
   if (rank == 0){
-    printf("Total number of triple friends=%d\n",total_friends_of_ten);
+    printf("MPI rank <%d>: MASTER RECIEVED Total number of triple friends=%d\n",rank,total_friends_of_ten);
     free2dint_array(v);
   }
 
-  MPI_Finalize ();
+  MPI_Finalize();
   return 0;
 }

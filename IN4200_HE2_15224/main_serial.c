@@ -7,6 +7,9 @@
 #include "src/count_friends_of_ten.h"
 
 int main(int argc, char *argv[]){
+  /*
+  A main to call the different function and print some of the results for the serial algo.
+  */
   int m, n, test_num, max_rng;
   int **v;
   int total_friends_of_ten = 0;
@@ -40,7 +43,7 @@ int main(int argc, char *argv[]){
 
   m = atoi(argv[1]);
   n = atoi(argv[2]);
-  max_rng = 7;
+  max_rng = 9;
   zeroes2D_array(&v,m,n); //allocates a 2D int array of zeroes
 
   for (size_t i = 0; i < m; i++) {

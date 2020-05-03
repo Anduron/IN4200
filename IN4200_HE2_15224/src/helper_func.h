@@ -50,6 +50,16 @@ void zeroes2D_array(int ***A, int m, int n){
 }
 
 void test2D_array(char *filename, int ***A, int *m, int *n, int *test_num){
+  /*
+  1. char *filename the name of the file you want to test
+  2. int ***A the int triple pointer to the 2D array that you want to print.
+  A is an mxn 2D array.
+  3. int *m pointer to the height of A.
+  4. int *n pointer to the lenght of A.
+  5. int *test_num the pointer to the correct number of friends of three
+  Reads a file of a spesific format and returns the result for caluclation
+  (data is labelled)
+  */
   FILE *infile = fopen(filename, "r");
   int dummy; //to avoid warnings from fscanf
 

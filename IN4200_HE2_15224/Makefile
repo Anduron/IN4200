@@ -1,5 +1,10 @@
 CC := gcc
-MPICC := mpicc
+
+ifeq ($(shell uname -n), Antares)
+	MPICC := mpicc
+else
+	MPICC := /usr/lib64/openmpi/bin/mpicc
+endif
 
 CFLAGS = -O3 -std=c11
 

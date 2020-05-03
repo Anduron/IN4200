@@ -43,10 +43,10 @@ both presentation and content.
 - Files in main folder
 
   - [main_serial.c]
-    - file for running and printing the main results of the serial functions found in src folder that was created during this exam
+    - file for running and printing the main results of the serial functions found in main folder that was created during this exam
 
   - [mpi_main.c]
-    - file for running and printing the main results of the parallel MPI functions found in src folder that was created during this exam
+    - file for running and printing the main results of the parallel MPI functions found in main folder that was created during this exam
 
 
 ## Usage
